@@ -30,7 +30,7 @@ public class IotModerator
 	 * {@link} stocks/previous : StockWatcher rest params
 	 * 
 	 */
-    @Schedule(second="0", minute="*/1", hour="*", persistent=false)
+    @Schedule(second="0", minute="*/5", hour="*", persistent=false)
     public void getIEX_Previous()
     {
     	// Opens a client
@@ -51,8 +51,8 @@ public class IotModerator
 		
 		// Post Json
 		response = client.target(targetUrl).request().post(Entity.entity(stocks, MediaType.APPLICATION_JSON));
-		// Read Response Code from service
-		System.out.println("\tStatus : " + response.getStatus());
+		// Read Response Code from servicec
+		System.out.println(String.format("===> Response: %s", response.readEntity(String.class)));
 		
 		// Closes the Channel & Connection
 		response.close();
